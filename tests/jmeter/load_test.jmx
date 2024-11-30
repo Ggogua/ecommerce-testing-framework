@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestPlan version="1.2" properties="5.0" jmeter="5.4.1">
+  <hashTree>
+    <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group - User Actions on Amazon" enabled="true">
+      <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+      <elementProp name="ThreadGroup.main_controller" elementType="LoopController">
+        <stringProp name="LoopController.loops">1</stringProp> 
+      </elementProp>
+      <stringProp name="ThreadGroup.num_threads">100</stringProp> 
+      <stringProp name="ThreadGroup.ramp_time">10</stringProp> 
+      <stringProp name="ThreadGroup.duration">300</stringProp> 
+      <stringProp name="ThreadGroup.scheduler">false</stringProp>
+      <stringProp name="ThreadGroup.delay">0</stringProp>
+      <stringProp name="ThreadGroup.duration_unit">seconds</stringProp>
+      <stringProp name="ThreadGroup.ramp_time_unit">seconds</stringProp>
+      <stringProp name="ThreadGroup.num_threads_unit">users</stringProp>
+    </ThreadGroup>
+    <hashTree>
+      
+      <!-- HTTP Request for Logging In -->
+      <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Amazon - Login Page" enabled="true">
+        <stringProp name="HTTPSampler.domain">www.amazon.com</stringProp>
+        <stringProp name="HTTPSampler.port">443</stringProp>
+        <stringProp name="HTTPSampler.protocol">https</stringProp>
+        <stringProp name="HTTPSampler.path">/ap/signin</stringProp>
+        <stringProp name="HTTPSampler.method">GET</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+      </HTTPSamplerProxy>
+      <hashTree/>
+
+      <!-- HTTP Request for Searching a Product -->
+      <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Amazon - Search Product" enabled="true">
+        <stringProp name="HTTPSampler.domain">www.amazon.com</stringProp>
+        <stringProp name="HTTPSampler.port">443</stringProp>
+        <stringProp name="HTTPSampler.protocol">https</stringProp>
+        <stringProp name="HTTPSampler.path">/s?k=laptop</stringProp>
+        <stringProp name="HTTPSampler.method">GET</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+      </HTTPSamplerProxy>
+      <hashTree/>
+
+      <!-- HTTP Request for Adding to Cart -->
+      <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Amazon - Add to Cart" enabled="true">
+        <stringProp name="HTTPSampler.domain">www.amazon.com</stringProp>
+        <stringProp name="HTTPSampler.port">443</stringProp>
+        <stringProp name="HTTPSampler.protocol">https</stringProp>
+        <stringProp name="HTTPSampler.path">/gp/cart/view.html</stringProp> 
+        <stringProp name="HTTPSampler.method">POST</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+      </HTTPSamplerProxy>
+      <hashTree/>
+
+      <!-- HTTP Request for Checkout -->
+      <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Amazon - Checkout" enabled="true">
+        <stringProp name="HTTPSampler.domain">www.amazon.com</stringProp>
+        <stringProp name="HTTPSampler.port">443</stringProp>
+        <stringProp name="HTTPSampler.protocol">https</stringProp>
+        <stringProp name="HTTPSampler.path">/checkout</stringProp> 
+        <stringProp name="HTTPSampler.method">POST</stringProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+      </HTTPSamplerProxy>
+      <hashTree/>
+
+      <!-- Listener to collect results -->
+      <ResultCollector guiclass="GraphConsumer" testclass="ResultCollector" testname="Test Results" enabled="true">
+        <stringProp name="filename">results.jtl</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      
+    </hashTree>
+  </hashTree>
+</TestPlan>
